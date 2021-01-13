@@ -42,6 +42,7 @@ LOG_MODULE_REGISTER(modem_info);
 #define AT_CMD_IMSI		"AT+CIMI"
 #define AT_CMD_IMEI		"AT+CGSN"
 #define AT_CMD_DATE_TIME	"AT+CCLK?"
+#define AT_CMD_MONITOR		"AT%XMONITOR"
 #define AT_CMD_SUCCESS_SIZE	5
 
 #define RSRP_DATA_NAME		"rsrp"
@@ -66,6 +67,7 @@ LOG_MODULE_REGISTER(modem_info);
 #define MODEM_IMEI_DATA_NAME	"imei"
 #define DATE_TIME_DATA_NAME	"dateTime"
 #define APN_DATA_NAME		"apn"
+#define OPERATOR_NAME_DATA_NAME	"operator"
 
 #define AT_CMD_RSP_DELIM "\r\n"
 #define IP_ADDR_SEPARATOR ", "
@@ -130,6 +132,9 @@ LOG_MODULE_REGISTER(modem_info);
 
 #define APN_PARAM_INDEX		3
 #define APN_PARAM_COUNT		7
+
+#define OPERATOR_NAME_PARAM_INDEX	2
+#define OPERATOR_NAME_PARAM_COUNT	17
 
 struct modem_info_data {
 	const char *cmd;
@@ -315,6 +320,14 @@ static const struct modem_info_data apn_data = {
 	.data_type	= AT_PARAM_TYPE_STRING,
 };
 
+static const struct modem_info_data operator_name_data = {
+	.cmd		= AT_CMD_MONITOR,
+	.data_name	= OPERATOR_NAME_DATA_NAME,
+	.param_index	= OPERATOR_NAME_PARAM_INDEX,
+	.param_count	= OPERATOR_NAME_PARAM_COUNT,
+	.data_type	= AT_PARAM_TYPE_STRING,
+};
+
 static const struct modem_info_data *const modem_data[] = {
 	[MODEM_INFO_RSRP]	= &rsrp_data,
 	[MODEM_INFO_CUR_BAND]	= &band_data,
@@ -338,6 +351,7 @@ static const struct modem_info_data *const modem_data[] = {
 	[MODEM_INFO_IMEI]	= &imei_data,
 	[MODEM_INFO_DATE_TIME]	= &date_time_data,
 	[MODEM_INFO_APN]	= &apn_data,
+	[MODEM_INFO_OPERATOR_NAME]	=&operator_name_data
 };
 
 static rsrp_cb_t modem_info_rsrp_cb;
