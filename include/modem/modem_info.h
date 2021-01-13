@@ -64,6 +64,7 @@ enum modem_info {
 	MODEM_INFO_IMEI,	/**< Modem serial number. */
 	MODEM_INFO_DATE_TIME,	/**< Mobile network time and date */
 	MODEM_INFO_APN,		/**< Access point name. */
+	MODEM_INFO_OPERATOR_NAME, /**< Operator full name. */
 	MODEM_INFO_COUNT,	/**< Number of legal elements in the enum. */
 };
 
